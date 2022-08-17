@@ -7,8 +7,8 @@ const snacksController = require("./controllers/snackController.js");
 const app = express();
 
 // MIDDLEWARE
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 app.use("/snacks", snacksController);
 
 // ROUTES
