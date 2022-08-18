@@ -24,8 +24,9 @@ const confirmHealth = (req, res, next) => {
   if(req.body.added_sugar < 5){
       if(req.body.protein >= 5 || req.body.fiber >=5){
           req.body.is_healthy = true
+      } else {
+        req.body.is_healthy = false
       }
-      req.body.is_healthy = false
   } else {
       req.body.is_healthy = false
   }

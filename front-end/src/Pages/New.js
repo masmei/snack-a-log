@@ -1,9 +1,12 @@
-import React from 'react'
+import SnackNewForm from "../Components/SnackNewForm";
 
 function New() {
   return (
-    <div>New</div>
-  )
+    <div className="New">
+      <h2>New</h2>
+      <SnackNewForm />
+    </div>
+  );
 }
 
-export default New
+export default New;

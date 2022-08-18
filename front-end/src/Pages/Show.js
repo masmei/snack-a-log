@@ -1,9 +1,12 @@
-import React from 'react'
+import SnackDetails from "../Components/SnackDetails";
 
 function Show() {
   return (
-    <div>Show</div>
-  )
+    <div className="Show">
+      <h2>Show</h2>
+      <SnackDetails />
+    </div>
+  );
 }
 
-export default Show
+export default Show;

@@ -13,7 +13,7 @@ app.use("/snacks", snacksController);
 
 // ROUTES
 app.get("/", (req, res) => {
-  res.send("Welcome to Snacks App");
+  res.send("Get Snack'n at Snack-a-log!");
 });
 
 // 404 PAGE

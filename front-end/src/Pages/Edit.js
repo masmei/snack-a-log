@@ -1,9 +1,12 @@
-import React from 'react'
+import SnackEditForm from "../Components/SnackEditForm";
 
 function Edit() {
   return (
-    <div>Edit</div>
-  )
+    <div className="New Edit">
+      <h2>Edit</h2>
+      <SnackEditForm />
+    </div>
+  );
 }
 
-export default Edit
+export default Edit;
