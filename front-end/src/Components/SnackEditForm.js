@@ -21,7 +21,7 @@ function SnackEditForm() {
       .put(`${API}/snacks/${id}`, updatedSnack)
       .then(
         () => {
-          navigate(`/snacks/${id}`);
+          navigate(`/snacks`);
         },
         (error) => console.error(error)
       )
@@ -34,7 +34,7 @@ function SnackEditForm() {
 
   useEffect(() => {
     axios.get(`${API}/snacks/${id}`).then(
-      (response) => setSnack(response.data),
+      (response) => setSnack(response.data.payload),
       (error) => navigate(`/not-found`)
     );
   }, [id, navigate]);
@@ -55,12 +55,11 @@ function SnackEditForm() {
           placeholder="Name of Snack"
           required
         />
-        <label htmlFor="url">Image URL:</label>
+        <label htmlFor="image">Image URL:</label>
         <input
-          id="url"
+          id="image"
           type="text"
           pattern="http[s]*://.+"
-          required
           value={snack.image}
           placeholder="http://"
           onChange={handleTextChange}
@@ -68,7 +67,7 @@ function SnackEditForm() {
         <label htmlFor="protein">Protein:</label>
         <input
           id="protein"
-          type="text"
+          type="number"
           name="protein"
           value={snack.protein}
           onChange={handleTextChange}
@@ -76,7 +75,7 @@ function SnackEditForm() {
          <label htmlFor="fiber">Fiber:</label>
         <input
           id="fiber"
-          type="text"
+          type="number"
           name="fiber"
           value={snack.fiber}
           onChange={handleTextChange}
@@ -84,7 +83,7 @@ function SnackEditForm() {
          <label htmlFor="added_sugar">Added Sugar:</label>
         <input
           id="added_sugar"
-          type="text"
+          type="number"
           name="added_sugar"
           value={snack.added_sugar}
           onChange={handleTextChange}

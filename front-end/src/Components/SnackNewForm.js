@@ -47,12 +47,11 @@ function SnackNewForm() {
           placeholder="Name of Snack"
           required
         />
-        <label htmlFor="url">Image URL:</label>
+        <label htmlFor="image">Image URL:</label>
         <input
-          id="url"
+          id="image"
           type="text"
           pattern="http[s]*://.+"
-          required
           value={snack.image}
           placeholder="http://"
           onChange={handleTextChange}
@@ -60,7 +59,7 @@ function SnackNewForm() {
         <label htmlFor="protein">Protein:</label>
         <input
           id="protein"
-          type="text"
+          type="number"
           name="protein"
           value={snack.protein}
           onChange={handleTextChange}
@@ -68,7 +67,7 @@ function SnackNewForm() {
          <label htmlFor="fiber">Fiber:</label>
         <input
           id="fiber"
-          type="text"
+          type="number"
           name="fiber"
           value={snack.fiber}
           onChange={handleTextChange}
@@ -76,7 +75,7 @@ function SnackNewForm() {
          <label htmlFor="added_sugar">Added Sugar:</label>
         <input
           id="added_sugar"
-          type="text"
+          type="number"
           name="added_sugar"
           value={snack.added_sugar}
           onChange={handleTextChange}

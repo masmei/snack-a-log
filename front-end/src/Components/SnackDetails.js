@@ -12,7 +12,7 @@ function SnackDetails() {
 
   useEffect(() => {
     axios.get(`${API}/snacks/${id}`).then((response) => {
-      setSnack(response.data);
+      setSnack(response.data.payload);
     });
   }, [id, navigate, API]);
   const deleteSnack = () => {
@@ -36,14 +36,15 @@ function SnackDetails() {
             <h4>This snack is unhealthy</h4>
           )}
         </section>
-        <h3>{snack.is_healthy ? <img src={heartSolid}/> : <img src={heartRegular}/>}</h3>
+        <aside>{snack.is_healthy ? <img src={heartSolid} alt="healthy food"/> : <img src={heartRegular} alt="unhealthy food"/>}</aside>
         <h3>{snack.name}</h3>
-        <span>
-          <img src={snack.image} width="300px" height="300px" />
-        </span>
+        <div>
+          <img src={snack.image} width="300px" height="300px" alt={snack.name}/>
         <h5>Protein: {snack.protein}</h5>
         <h5>Fiber: {snack.fiber}</h5>
         <h5>Added Sugar: {snack.added_sugar}</h5>
+        </div>
+        
         <div className="showNavigation">
           <div>
             {" "}
