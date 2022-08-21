@@ -7,7 +7,7 @@ function Snack({ snack }) {
     <div className="Snack">
       <Link to={`/snacks/${snack.id}`}>
       <span>
-        <img src={snack.image} alt={snack.is_healthy ? "healthy food" : "unhealthy food"} width='150px' height='150px' />
+        <img src={snack.image} alt={snack.is_healthy ? "healthy food" : "unhealthy food"} width='200px' height='200px' />
       </span>
       <br></br>
       <span>
