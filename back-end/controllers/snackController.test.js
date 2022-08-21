@@ -38,8 +38,8 @@ describe("snacks", () => {
         const parsedRes = JSON.parse(response.text);
 
         expect(parsedRes.success).toBe(true);
-        expect(parsedRes.id).toEqual(1);
-        expect(parsedRes.name).toEqual("Strawberries");
+        expect(parsedRes.payload.id).toEqual(1);
+        expect(parsedRes.payload.name).toEqual("Strawberries");
       });
 
       it("with incorrect id - sets status to 404 and returns error key", async () => {
@@ -48,7 +48,7 @@ describe("snacks", () => {
 
         expect(response.statusCode).toEqual(404);
         expect(parsedRes.success).toBe(false);
-        expect(parsedRes).toMatch(/not found/);
+        expect(parsedRes.payload).toMatch(/not found/);
       });
     });
     describe("DELETE", () => {
@@ -57,8 +57,8 @@ describe("snacks", () => {
         const parsedRes = JSON.parse(response.text);
 
         expect(parsedRes.success).toBe(true);
-        expect(parsedRes.id).toEqual(1);
-        expect(parsedRes.name).toEqual("Strawberries");
+        expect(parsedRes.payload.id).toEqual(1);
+        expect(parsedRes.payload.name).toEqual("Strawberries");
       });
 
       it("with invalid id - does not delete anything", async () => {
@@ -66,7 +66,7 @@ describe("snacks", () => {
         const parsedRes = JSON.parse(response.text);
 
         expect(parsedRes.success).toBe(false);
-        expect(parsedRes.id).toBe(undefined);
+        expect(parsedRes.payload.id).toBe(undefined);
       });
     });
   });
@@ -135,7 +135,7 @@ describe("snacks", () => {
         const response = await request(snacks).get("/snacks").expect(200);
         const parsedRes = JSON.parse(response.text);
 
-        expect(parsedRes).toEqual(expect.arrayContaining(expected));
+        expect(parsedRes.payload).toEqual(expect.arrayContaining(expected));
       });
     });
 
@@ -153,8 +153,8 @@ describe("snacks", () => {
         const parsedRes = JSON.parse(response.text);
 
         expect(parsedRes.success).toBe(true);
-        expect(!!parsedRes.id).toBe(true);
-        expect(parsedRes.image).toEqual(
+        expect(!!parsedRes.payload.id).toBe(true);
+        expect(parsedRes.payload.image).toEqual(
           "https://i3.wp.com/onmykidsplate.com/wp-content/uploads/2018/09/Halloween-Snack-Spider-Peanut-Butter-Celery.jpg"
         );
       });
@@ -166,9 +166,9 @@ describe("snacks", () => {
         const parsedRes = JSON.parse(response.text);
 
         expect(parsedRes.success).toBe(true);
-        expect(!!parsedRes.id).toBe(true);
-        expect(parsedRes.name).toEqual("Banana");
-        expect(parsedRes.image).toEqual(
+        expect(!!parsedRes.payload.id).toBe(true);
+        expect(parsedRes.payload.name).toEqual("Banana");
+        expect(parsedRes.payload.image).toEqual(
           "https://dummyimage.com/400x400/6e6c6e/e9e9f5.png&text=No+Image"
         );
       });
@@ -186,8 +186,8 @@ describe("snacks", () => {
         const parsedRes = JSON.parse(response.text);
 
         expect(parsedRes.success).toBe(true);
-        expect(!!parsedRes.id).toBe(true);
-        expect(parsedRes.name).toEqual("Spiders on a Log");
+        expect(!!parsedRes.payload.id).toBe(true);
+        expect(parsedRes.payload.name).toEqual("Spiders on a Log");
       });
 
       it("with valid snack name, will capitalize as expected", async () => {
@@ -198,8 +198,8 @@ describe("snacks", () => {
         const parsedRes = JSON.parse(response.text);
 
         expect(parsedRes.success).toBe(true);
-        expect(!!parsedRes.id).toBe(true);
-        expect(parsedRes.name).toEqual("Combos");
+        expect(!!parsedRes.payload.id).toBe(true);
+        expect(parsedRes.payload.name).toEqual("Combos");
       });
 
       it("with valid snack name mixed capitalization - can create a properly capitalized snack", async () => {
@@ -210,8 +210,8 @@ describe("snacks", () => {
         const parsedRes = JSON.parse(response.text);
 
         expect(parsedRes.success).toBe(true);
-        expect(!!parsedRes.id).toBe(true);
-        expect(parsedRes.name).toEqual("Flamin' Hot Cheetoes");
+        expect(!!parsedRes.payload.id).toBe(true);
+        expect(parsedRes.payload.name).toEqual("Flamin' Hot Cheetoes");
       });
 
       it("with invalid fiber, protein or added_sugar- can NOT determine health of snack", async () => {
@@ -223,8 +223,8 @@ describe("snacks", () => {
         const parsedRes = JSON.parse(response.text);
 
         expect(parsedRes.success).toBe(true);
-        expect(!!parsedRes.id).toBe(true);
-        expect(parsedRes.is_healthy).toBe(null);
+        expect(!!parsedRes.payload.id).toBe(true);
+        expect(parsedRes.payload.is_healthy).toBe(null);
       });
     });
 

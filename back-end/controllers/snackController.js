@@ -1,14 +1,20 @@
 const express = require("express");
 const snacks = express.Router();
-const { getAllSnacks, getSnack, createSnack, deleteSnack, updateSnack } = require("../queries/snacks");
-const { checkName, validateURL, confirmHealth } = require("../validations/checkSnacks.js");
-
+const {
+  getAllSnacks,
+  getSnack,
+  createSnack,
+  deleteSnack,
+  updateSnack,
+} = require("../queries/snacks");
+const { checkName, validateURL } = require("../validations/checkSnacks.js");
+const confirmHealth = require("../confirmHealth");
 
 // INDEX
 snacks.get("/", async (req, res) => {
   const allSnacks = await getAllSnacks();
   if (allSnacks[0]) {
-    res.status(200).json(allSnacks);
+    res.status(200).json({ payload: allSnacks, success: true });
   } else {
     res.status(500).json({ error: "server error" });
   }
@@ -18,47 +24,59 @@ snacks.get("/", async (req, res) => {
 snacks.get("/:id", async (req, res) => {
   const { id } = req.params;
   const snack = await getSnack(id);
-  if (snack) {
-    res.json(snack);
+  if (snack.id) {
+    res.json({ payload: snack, success: true });
   } else {
-    res.status(404).json({ error: "not found" });
+    res.status(404).json({ payload: "not found", success: false });
   }
 });
 
-
 //Create
-snacks.post("/", checkName, confirmHealth, async (req, res) => {
+snacks.post("/", checkName, async (req, res) => {
+  let { name, fiber, protein, added_sugar, image } = req.body;
   try {
-    const snack = await createSnack(req.body);
-    res.json(snack);
+    isHealthy = confirmHealth(req.body);
+    const snack = await createSnack(
+      name,
+      fiber,
+      protein,
+      added_sugar,
+      isHealthy,
+      image
+    );
+    res.json({ payload: snack, success: true });
   } catch (error) {
     res.status(400).json({ error: error });
   }
 });
-
 
 //Delete
 snacks.delete("/:id", async (req, res) => {
   const { id } = req.params;
   const deletedSnack = await deleteSnack(id);
   if (deletedSnack.id) {
-    res.status(200).json(deletedSnack);
+    res.status(200).json({ payload: deletedSnack, success: true });
   } else {
-    res.status(404).json("Snack not found");
+    res.status(404).json({ payload: "Snack not found", success: false });
   }
 });
 
 //Update
-snacks.put("/:id", checkName, confirmHealth, async (req, res) => {
+snacks.put("/:id", checkName, async (req, res) => {
+  let { name, fiber, protein, added_sugar, image } = req.body;
+  isHealthy = confirmHealth(req.body);
   const { id } = req.params;
-  console.log(id)
-  const updatedSnack = await updateSnack(id, req.body);
-  console.log(updatedSnack)
+  const updatedSnack = await updateSnack(id, name,
+    fiber,
+    protein,
+    added_sugar,
+    isHealthy,
+    image);
   if (updatedSnack.id) {
-    res.status(200).json(updatedSnack);
+    res.status(200).json({ payload: updatedSnack, success: true });
   } else {
-    res.status(404).json({error: "Unable to update Snack"});
+    res.status(422).json({ payload: "Unable to update snack", success: false });
   }
-})
+});
 
 module.exports = snacks;

@@ -18,17 +18,31 @@ const getSnack = async (id) => {
   }
 };
 
-const createSnack = async (snack) => {
+const createSnack = async (name, fiber, protein, added_sugar, isHealthy, image) => {
+  let lowercaseName = name.toLowerCase().split(" ")
+  let snackName = lowercaseName.map((word) => {
+    if(word.length > 2){
+      return word.charAt(0).toUpperCase() + word.substring(1)
+    } else {
+      return word
+    }
+  }).join(" ");
+  
+  if(!image){
+    image = "https://dummyimage.com/400x400/6e6c6e/e9e9f5.png&text=No+Image"
+  }
+
+
   try {
     const newSnack = await db.one(
       "INSERT INTO snacks (name, fiber, protein, added_sugar, is_healthy, image) VALUES($1, $2, $3, $4, $5, $6) RETURNING *",
       [
-        snack.name,
-        snack.fiber,
-        snack.protein,
-        snack.added_sugar,
-        snack.is_healthy,
-        snack.image,
+        snackName,
+        fiber,
+        protein,
+        added_sugar,
+        isHealthy,
+        image,
       ]
     );
     return newSnack;
@@ -49,18 +63,31 @@ const deleteSnack = async (id) => {
   }
 };
 
-const updateSnack = async (id, snack) => {
+const updateSnack = async (id, name, fiber, protein, added_sugar, isHealthy, image) => {
+  let lowercaseName = name.toLowerCase().split(" ")
+  let snackName = lowercaseName.map((word) => {
+    if(word.length > 2){
+      return word.charAt(0).toUpperCase() + word.substring(1)
+    } else {
+      return word
+    }
+  }).join(" ");
+  
+  if(!image){
+    image = "https://dummyimage.com/400x400/6e6c6e/e9e9f5.png&text=No+Image"
+  }
+
   try {
     const updatedSnack = await db.one(
       "UPDATE snacks SET name=$1, fiber=$2, protein=$3, added_sugar=$4, is_healthy=$5, image=$6 where id=$7 RETURNING *",
       [
-        snack.name,
-        snack.fiber,
-        snack.protein,
-        snack.added_sugar,
-        snack.is_healthy,
-        snack.image,
-        id
+        snackName,
+        fiber,
+        protein,
+        added_sugar,
+        isHealthy,
+        image,
+        id,
       ]
     );
     return updatedSnack;
@@ -69,4 +96,10 @@ const updateSnack = async (id, snack) => {
   }
 };
 
-module.exports = { getAllSnacks, getSnack, createSnack, deleteSnack, updateSnack };
+module.exports = {
+  getAllSnacks,
+  getSnack,
+  createSnack,
+  deleteSnack,
+  updateSnack,
+};
