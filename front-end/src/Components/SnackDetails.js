@@ -31,9 +31,9 @@ function SnackDetails() {
       <article>
         <section>
           {snack.is_healthy ? (
-            <h4>This snack is healthy</h4>
+            <h4>This snack is healthy!</h4>
           ) : (
-            <h4>This snack is unhealthy</h4>
+            <h4>This snack is unhealthy!</h4>
           )}
         </section>
         <aside>{snack.is_healthy ? <img src={heartSolid} alt="healthy food"/> : <img src={heartRegular} alt="unhealthy food"/>}</aside>

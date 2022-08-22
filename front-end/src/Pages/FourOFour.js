@@ -2,7 +2,7 @@ import React from 'react'
 
 function FourOFour() {
   return (
-    <div>FourOFour</div>
+    <div>Didn't Find Your Page...</div>
   )
 }
 
