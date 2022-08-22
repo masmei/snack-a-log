@@ -7,10 +7,10 @@ function Index() {
     <div className="Index">
       <h2>Snack List</h2>
       <h5>Healthy: 
-      <img src={heartSolid} height="30px" width="30px"></img>
+      <img src={heartSolid} height="30px" width="30px" alt="healthy"/>
       </h5>
       <h5>Unhealthy:  
-      <img src={heartRegular} height="30px" width="30px"></img>
+      <img src={heartRegular} height="30px" width="30px" alt="unhealthy"/>
       </h5>
       <Snacks />
     </div>
