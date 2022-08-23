@@ -1,5 +1,7 @@
 # Full Stack Application Pair Project
 
+Deployed Site URL: https://snackcheck.netlify.app/
+
 ## Snack-a-log
 
 Create an app that allows users to log their favorite snacks. Add functionality that allows users to see whether or not their snack is healthy based on a simple algorithm.
@@ -144,3 +146,5 @@ Keep the React app running, open a new tab and run
 ## Resources
 
 This project uses [this template](https://github.com/joinpursuit/pern-final-project-template) - you can follow the readme to set up deployment.
+
+Deployed Site URL: https://snackcheck.netlify.app/
